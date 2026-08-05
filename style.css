@@ -1,23 +1,25 @@
 /* ============================================================
-   Mariam Khayat — design tokens
-   Palette: night-sea petrol ground, AlUla sand + gold accents,
-   seagrass (conservation track) and brick-coral (film track).
-   Type: Fraunces (director/artist register) vs Inter (strategist
-   register) — the typeface itself shifts with the track.
-   Signature: the horizon line — a thin rule that reads as both
-   a sea horizon and a film letterbox bar, and moves/recolors
-   depending which track you're on.
+   Mariam Khayat — design tokens, v2 (light / sea-layered)
+   Moved off the dark night-sea theme to a bright, white-forward
+   palette in shades of sea blue, per direct feedback. Keeps the
+   dual-track structure and the horizon-line signature, adds
+   layered soft-light "through water" glows behind the hero for
+   depth instead of flat color, and a slot for a real film still
+   (TMFA) as the hero's anchor image.
    ============================================================ */
 
 :root {
-  --ink: #0d2226;          /* deep night-sea, primary background */
-  --ink-2: #123138;        /* slightly lifted panel bg */
-  --paper: #f2ecdd;        /* warm sand, light sections / text on dark */
-  --paper-dim: #cfc6ac;    /* muted sand for secondary text on dark */
-  --gold: #c9a15a;         /* AlUla gold — shared accent, festival track */
-  --seagrass: #5c8a76;     /* conservation accent */
-  --coral: #b5573f;        /* film/director accent (shifted off the D97757 tell) */
-  --line: rgba(242,236,221,0.16);
+  --bg: #faf9f5;            /* warm white, primary background */
+  --bg-alt: #eef4f5;        /* pale sea tint, alternate sections */
+  --ink: #10303e;           /* deep sea-navy, primary text */
+  --ink-dim: #5c7078;       /* muted secondary text */
+  --sea-deep: #1c5770;      /* primary blue accent */
+  --sea-mid: #4f8fa6;       /* mid blue, layered glows / links */
+  --sea-glow: #a9d4de;      /* pale glow accent for depth layers */
+  --gold: #c9a15a;          /* AlUla gold — sparing accent */
+  --coral: #b5573f;         /* film/director track accent */
+  --seagrass: #4b7d68;      /* conservation track accent */
+  --line: rgba(16,48,62,0.12);
   --radius: 2px;
 
   --font-display: "Fraunces", "Iowan Old Style", serif;
@@ -36,8 +38,8 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--bg);
+  color: var(--ink);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.6;
@@ -59,7 +61,7 @@ img { max-width: 100%; display: block; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(13,34,38,0.92);
+  background: rgba(250,249,245,0.88);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--line);
 }
@@ -76,6 +78,7 @@ img { max-width: 100%; display: block; }
   font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: 0.02em;
+  color: var(--ink);
 }
 
 .site-nav .links {
@@ -88,7 +91,8 @@ img { max-width: 100%; display: block; }
 }
 
 .site-nav .links a {
-  opacity: 0.75;
+  opacity: 0.65;
+  color: var(--ink);
   border-bottom: 1px solid transparent;
   padding-bottom: 4px;
   transition: opacity 0.2s, border-color 0.2s;
@@ -108,10 +112,10 @@ img { max-width: 100%; display: block; }
 .horizon {
   position: relative;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--sea-mid), transparent);
   margin: 0 auto;
   width: 100%;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .horizon.tone-film { background: linear-gradient(90deg, transparent, var(--coral), transparent); }
@@ -120,16 +124,49 @@ img { max-width: 100%; display: block; }
 /* ---------- Hero ---------- */
 
 .hero {
-  padding: 108px 0 72px;
+  position: relative;
+  padding: 96px 0 72px;
   text-align: center;
+  overflow: hidden;
 }
+
+/* Soft layered glows behind the hero, like light through shallow
+   water — this is the "not flat, has depth" element, done as
+   static layered gradients rather than motion. */
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero::before {
+  width: 520px; height: 520px;
+  background: radial-gradient(circle, var(--sea-glow) 0%, transparent 70%);
+  top: -220px; left: 50%;
+  transform: translateX(-70%);
+  opacity: 0.55;
+}
+
+.hero::after {
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+  top: -40px; left: 50%;
+  transform: translateX(30%);
+  opacity: 0.22;
+}
+
+.hero .wrap { position: relative; z-index: 1; }
 
 .hero .eyebrow {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--paper-dim);
+  color: var(--ink-dim);
   margin-bottom: 22px;
 }
 
@@ -139,6 +176,7 @@ img { max-width: 100%; display: block; }
   font-size: clamp(2.6rem, 6vw, 4.6rem);
   line-height: 1.02;
   margin: 0 0 30px;
+  color: var(--ink);
 }
 
 .split-tagline {
@@ -150,14 +188,56 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-mono);
   font-size: 0.85rem;
   letter-spacing: 0.04em;
-  color: var(--paper-dim);
+  color: var(--ink-dim);
 }
 
 .split-tagline .sep { color: var(--gold); }
 
+/* ---------- Hero anchor image (film still) ---------- */
+
+.hero-image {
+  position: relative;
+  z-index: 1;
+  margin: 44px auto 0;
+  max-width: 720px;
+  aspect-ratio: 16/9;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px -20px rgba(16,48,62,0.35);
+  background: linear-gradient(135deg, var(--sea-deep), var(--sea-mid));
+}
+
+.hero-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  /* Tints any photo dropped in toward the sea palette, so a film
+     still (e.g. a TMFA frame) reads as part of this world rather
+     than a random production photo. Remove the mix-blend/opacity
+     pair once a color-graded still is in place, if a fully true
+     image is preferred instead. */
+  mix-blend-mode: luminosity;
+  opacity: 0.9;
+}
+
+.hero-image .placeholder-note {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.85);
+  text-align: center;
+  padding: 24px;
+}
+
 /* ---------- Track cards ---------- */
 
 .tracks {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1px;
@@ -171,12 +251,12 @@ img { max-width: 100%; display: block; }
 }
 
 .track-card {
-  background: var(--ink);
+  background: var(--bg);
   padding: 48px 40px;
   transition: background 0.25s;
 }
 
-.track-card:hover { background: var(--ink-2); }
+.track-card:hover { background: var(--bg-alt); }
 
 .track-card .label {
   font-family: var(--font-mono);
@@ -194,12 +274,13 @@ img { max-width: 100%; display: block; }
   font-size: 1.7rem;
   font-weight: 500;
   margin: 0 0 14px;
+  color: var(--ink);
 }
 
 .track-card.film h2 { font-style: italic; }
 
 .track-card p {
-  color: var(--paper-dim);
+  color: var(--ink-dim);
   font-size: 0.95rem;
   margin: 0 0 20px;
 }
@@ -220,18 +301,16 @@ img { max-width: 100%; display: block; }
 
 section.block { padding: 96px 0; }
 section.block.tight { padding: 64px 0; }
-section.block.paper { background: var(--paper); color: var(--ink); }
+section.block.paper { background: var(--bg-alt); }
 
 .kicker {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--paper-dim);
+  color: var(--ink-dim);
   margin-bottom: 18px;
 }
-
-section.block.paper .kicker { color: #6b6350; }
 
 h2.section-title {
   font-family: var(--font-display);
@@ -239,6 +318,7 @@ h2.section-title {
   font-size: clamp(1.7rem, 3.4vw, 2.3rem);
   margin: 0 0 28px;
   max-width: 720px;
+  color: var(--ink);
 }
 
 .bio-body {
@@ -259,25 +339,21 @@ h2.section-title {
   border-top: 1px solid var(--line);
 }
 
-section.block.paper .credit-row { border-top: 1px solid rgba(13,34,38,0.14); }
-
 .credit-row:last-child { border-bottom: 1px solid var(--line); }
-section.block.paper .credit-row:last-child { border-bottom: 1px solid rgba(13,34,38,0.14); }
 
 .credit-row .title {
   font-family: var(--font-display);
   font-size: 1.2rem;
+  color: var(--ink);
 }
 
 .credit-row .meta {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.03em;
-  color: var(--paper-dim);
+  color: var(--ink-dim);
   white-space: nowrap;
 }
-
-section.block.paper .credit-row .meta { color: #6b6350; }
 
 /* ---------- Video grid ---------- */
 
@@ -288,10 +364,10 @@ section.block.paper .credit-row .meta { color: #6b6350; }
   margin-top: 36px;
 }
 
-.video-card { border: 1px solid var(--line); }
+.video-card { border: 1px solid var(--line); background: var(--bg); }
 .video-card .frame {
   aspect-ratio: 16/9;
-  background: var(--ink-2);
+  background: var(--bg-alt);
   position: relative;
   overflow: hidden;
 }
@@ -301,7 +377,7 @@ section.block.paper .credit-row .meta { color: #6b6350; }
   padding: 16px 18px;
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  color: var(--paper-dim);
+  color: var(--ink-dim);
   letter-spacing: 0.02em;
 }
 
@@ -327,15 +403,15 @@ footer .socials {
   font-size: 0.78rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--paper-dim);
+  color: var(--ink-dim);
 }
 
-footer .socials a:hover { color: var(--gold); }
+footer .socials a:hover { color: var(--sea-deep); }
 
 footer .copy {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--paper-dim);
+  color: var(--ink-dim);
 }
 
 /* ---------- Buttons ---------- */
@@ -348,9 +424,10 @@ footer .copy {
   font-size: 0.78rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  color: var(--ink);
   transition: background 0.2s, color 0.2s;
 }
 
-.btn.gold:hover { background: var(--gold); color: var(--ink); }
-.btn.coral:hover { background: var(--coral); color: var(--ink); }
-.btn.seagrass:hover { background: var(--seagrass); color: var(--ink); }
+.btn.gold:hover { background: var(--gold); color: var(--bg); }
+.btn.coral:hover { background: var(--coral); color: var(--bg); }
+.btn.seagrass:hover { background: var(--seagrass); color: var(--bg); }
