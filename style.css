@@ -214,13 +214,6 @@ img { max-width: 100%; display: block; }
 .hero-image img {
   width: 100%; height: 100%;
   object-fit: cover;
-  /* Tints any photo dropped in toward the sea palette, so a film
-     still (e.g. a TMFA frame) reads as part of this world rather
-     than a random production photo. Remove the mix-blend/opacity
-     pair once a color-graded still is in place, if a fully true
-     image is preferred instead. */
-  mix-blend-mode: luminosity;
-  opacity: 0.9;
 }
 
 .hero-image .placeholder-note {
@@ -350,6 +343,14 @@ h2.section-title {
   font-size: 1.2rem;
   color: var(--ink);
 }
+
+.credit-row .title a {
+  color: var(--ink);
+  border-bottom: 1px solid var(--coral);
+  transition: color 0.2s;
+}
+
+.credit-row .title a:hover { color: var(--coral); }
 
 .credit-row .meta {
   font-family: var(--font-mono);
