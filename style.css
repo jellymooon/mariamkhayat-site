@@ -199,12 +199,16 @@ img { max-width: 100%; display: block; }
   position: relative;
   z-index: 1;
   margin: 44px auto 0;
-  max-width: 720px;
-  aspect-ratio: 16/9;
+  max-width: 980px;
+  aspect-ratio: 21/9;
   border-radius: 3px;
   overflow: hidden;
-  box-shadow: 0 30px 60px -20px rgba(16,48,62,0.35);
+  box-shadow: 0 40px 80px -24px rgba(16,48,62,0.4);
   background: linear-gradient(135deg, var(--sea-deep), var(--sea-mid));
+}
+
+@media (max-width: 1040px) {
+  .hero-image { max-width: 92%; }
 }
 
 .hero-image img {
