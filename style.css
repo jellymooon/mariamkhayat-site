@@ -634,6 +634,8 @@ ul.compact-list li strong { color: var(--ink); font-weight: 500; }
 
 /* ---------- Compact festival/awards list ---------- */
 
+.kicker.gold { color: var(--gold); }
+
 .fest-compact {
   display: grid;
   grid-template-columns: 1fr 1fr;
