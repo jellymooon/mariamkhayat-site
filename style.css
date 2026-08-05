@@ -419,7 +419,134 @@ footer .copy {
   color: var(--ink-dim);
 }
 
-/* ---------- Buttons ---------- */
+/* ---------- Visual film cards ---------- */
+
+.film-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-top: 12px;
+}
+
+.film-card {
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.film-card .thumb {
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, var(--sea-deep), var(--sea-mid));
+  overflow: hidden;
+}
+
+.film-card .thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.film-card .body { padding: 20px 22px 22px; }
+
+.film-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+
+.film-card h3 a { color: var(--ink); }
+.film-card h3 a:hover { color: var(--coral); }
+
+.film-card p {
+  color: var(--ink-dim);
+  font-size: 0.92rem;
+  margin: 0 0 18px;
+}
+
+.film-card .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.film-card .actions a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid var(--ink);
+  padding: 8px 14px;
+  color: var(--ink);
+  transition: background 0.2s, color 0.2s;
+}
+
+.film-card .actions a:hover { background: var(--ink); color: var(--bg); }
+.film-card .actions a.netflix:hover { background: var(--coral); color: var(--bg); border-color: var(--coral); }
+
+/* ---------- Compact craft pills (breadth without heavy real estate) ---------- */
+
+.pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.pill {
+  border: 1px solid var(--line);
+  padding: 7px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-dim);
+}
+
+/* ---------- Workshop cards (image + description) ---------- */
+
+.workshop-card {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  margin-bottom: 36px;
+  align-items: start;
+}
+
+@media (max-width: 640px) {
+  .workshop-card { grid-template-columns: 1fr; }
+}
+
+.workshop-card .thumb {
+  aspect-ratio: 4/3;
+  background: var(--bg-alt);
+  overflow: hidden;
+}
+
+.workshop-card .thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.workshop-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+
+.workshop-card .org {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--seagrass);
+  margin-bottom: 10px;
+}
+
+.workshop-card p {
+  color: var(--ink-dim);
+  font-size: 0.92rem;
+  margin: 0;
+}
 
 .btn {
   display: inline-block;
