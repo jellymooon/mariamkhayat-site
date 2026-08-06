@@ -426,7 +426,7 @@ footer .copy {
 }
 
 .film-card {
-  background: var(--bg);
+  background: none;
 }
 
 .film-card .thumb {
