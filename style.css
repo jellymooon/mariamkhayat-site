@@ -200,7 +200,6 @@ img { max-width: 100%; display: block; }
   z-index: 1;
   margin: 44px auto 0;
   max-width: 980px;
-  aspect-ratio: 21/9;
   border-radius: 3px;
   overflow: hidden;
   box-shadow: 0 40px 80px -24px rgba(16,48,62,0.4);
@@ -212,8 +211,8 @@ img { max-width: 100%; display: block; }
 }
 
 .hero-image img {
-  width: 100%; height: 100%;
-  object-fit: cover;
+  width: 100%; height: auto;
+  display: block;
 }
 
 .hero-image .placeholder-note {
@@ -427,14 +426,13 @@ footer .copy {
 }
 
 .film-card {
-  border: 1px solid var(--line);
   background: var(--bg);
 }
 
 .film-card .thumb {
   display: block;
   aspect-ratio: 3/4;
-  background: linear-gradient(135deg, var(--sea-deep), var(--sea-mid));
+  background: #ffffff;
   overflow: hidden;
 }
 
@@ -443,7 +441,7 @@ footer .copy {
 .film-card .thumb img {
   width: 100%; height: 100%;
   object-fit: contain;
-  background: var(--bg-alt);
+  background: #ffffff;
 }
 
 .film-card .body { padding: 20px 22px 22px; }
